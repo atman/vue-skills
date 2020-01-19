@@ -15,13 +15,14 @@
          <v-btn class="ma-2" outlined color="indigo">Login</v-btn>
        </v-app-bar>
      </div>
+
      <v-container class="grey lighten-5">
        <v-row>
-         <v-col cols="6">
+         <v-col cols="12" >
            <v-row align="center" justify="center" class="grey lighten-5">
-              <v-content>
+
                 <Skills/>
-              </v-content>
+
             </v-row>
           </v-col>
         </v-row>
