@@ -1,56 +1,44 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app id="app">
+    <div>
+      <v-app-bar>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+         <v-toolbar-title>Vue Skills</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+         <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+         <v-btn icon>
+           <v-icon>mdi-magnify</v-icon>
+         </v-btn>
 
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+         <v-btn class="ma-2" outlined color="indigo">Login</v-btn>
+       </v-app-bar>
+     </div>
+     <v-container class="grey lighten-5">
+       <v-row>
+         <v-col cols="6">
+           <v-row align="center" justify="center" class="grey lighten-5">
+              <v-content>
+                <Skills/>
+              </v-content>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+
+import Skills from './components/Skills';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    Skills
   },
 
   data: () => ({
@@ -58,3 +46,7 @@ export default {
   }),
 };
 </script>
+
+<style>
+
+</style>
