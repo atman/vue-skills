@@ -1,9 +1,9 @@
 <template>
-  <div class="hello">
+  <div class="hello" v-on:keyup.esc="clear">
     <v-card elevation="1">
-      <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes }">
+      <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes, passed, validate }">
         <form @submit.prevent="passes(submit)">
-          <ValidationProvider name="skill" rules="is_not:''|max:30" v-slot="{ errors, valid }">
+          <ValidationProvider mode="lazy" name="skill" rules="required|min:4|max:30" v-slot="{ errors, valid }">
             <v-text-field
               :counter="30"
               :error-messages="errors"
@@ -16,20 +16,21 @@
               solo
               v-model.trim="skill"
             ></v-text-field>
-          </ValidationProvider>
+            </ValidationProvider>
+            <v-card-actions>
+              <v-btn
+                v-on:click="passes(submit)"
+                color="primary"
+              >Add Skills</v-btn>
+            </v-card-actions>
+          
         </form>
 
 
-        <v-card-actions>
-          <v-btn
-            v-on:click="passes(submit)"
-            :disabled="invalid || !validated"
-            color="primary"
-          >Add Skills</v-btn>
-        </v-card-actions>
+        
       </ValidationObserver>
       <v-list subheader flat>
-        <v-list-item-group v-model="data" flat>
+        <v-list-item-group v-model="data">
           <v-subheader>Skills</v-subheader>
           <v-slide-y-transition class="py-0" group tag="v-list">
             <template v-for="(data, index) in skills">
@@ -61,6 +62,20 @@ import {
   ValidationObserver,
   ValidationProvider
 } from "vee-validate/dist/vee-validate.full.esm";
+import { setInteractionMode } from 'vee-validate';
+import { extend } from 'vee-validate';
+
+setInteractionMode('lazy');
+
+extend('required', {
+  validate (value) {
+    return {
+      required: true,
+      valid: ['', null, undefined].indexOf(value) === -1
+    };
+  },
+  computesRequired: true
+});
 
 export default {
   components: {
@@ -85,6 +100,7 @@ export default {
     },
     async submit() {
       this.addSkill();
+      this.clear();
     },
     addSkill() {
       this.skills.push({ skill: this.skill });
