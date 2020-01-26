@@ -3,9 +3,9 @@
     <v-card elevation="1">
       <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes }">
         <form @submit.prevent="passes(submit)">
-          <ValidationProvider name="skill" rules="required|max:10" v-slot="{ errors, valid }">
+          <ValidationProvider name="skill" rules="is_not:''|max:30" v-slot="{ errors, valid }">
             <v-text-field
-              :counter="10"
+              :counter="30"
               :error-messages="errors"
               :success="valid"
               placeholder="Enter New Skill"
@@ -19,10 +19,6 @@
           </ValidationProvider>
         </form>
 
-        <v-card-title class="headline">{{ name }}</v-card-title>
-
-        <v-card-subtitle>{{ btnState ? "Button is disabled" : "button is active"}}</v-card-subtitle>
-        <v-card-subtitle>{{ invalid }} {{ validated }}</v-card-subtitle>
 
         <v-card-actions>
           <v-btn
@@ -35,15 +31,17 @@
       <v-list subheader flat>
         <v-list-item-group v-model="data" flat>
           <v-subheader>Skills</v-subheader>
-          <template v-for="(data, index) in skills">
-            <v-list-item :key="index">
-              <v-list-item-content>
-                <v-list-item-title>{{ data.skill }}</v-list-item-title>
-              </v-list-item-content>
-              <v-icon @click="removeSkill(index)">mdi-delete</v-icon>
-            </v-list-item>
-            <v-divider :key="index"></v-divider>
-          </template>
+          <v-slide-y-transition class="py-0" group tag="v-list">
+            <template v-for="(data, index) in skills">
+              <v-list-item :key="index">
+                <v-list-item-content>
+                  <v-list-item-title>{{ data.skill }}</v-list-item-title>
+                </v-list-item-content>
+                <v-icon @click="removeSkill(index)">mdi-delete</v-icon>
+              </v-list-item>
+              <v-divider :key="index"></v-divider>
+            </template>
+          </v-slide-y-transition>
         </v-list-item-group>
       </v-list>
       <br />
@@ -87,7 +85,6 @@ export default {
     },
     async submit() {
       this.addSkill();
-      
     },
     addSkill() {
       this.skills.push({ skill: this.skill });

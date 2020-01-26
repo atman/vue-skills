@@ -1,57 +1,52 @@
 <template>
   <v-app id="app">
-    <div>
+    <nav>
       <v-app-bar>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
+        <v-toolbar-title class="test-uppercase grey--text">
+          <span class="font-weight-light">Vue</span>
+          <span class="font-weight-black">Skills</span>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <div class="hidden-sm-and-down">
+          <v-btn flat ><router-link to="/">Home</router-link></v-btn>
+          <v-btn flat class="ma-2"><router-link to="/about">About</router-link></v-btn>
+          <v-btn class="ma-2" outlined color="indigo">Login</v-btn>
+        </div>
+      </v-app-bar>
 
-         <v-toolbar-title>Vue Skills</v-toolbar-title>
+      <v-navigation-drawer app temporary v-model="drawer">
+        <v-btn flat><router-link to="/">Home</router-link></v-btn>
+        <v-btn flat><router-link to="/about">About</router-link></v-btn>
 
-         <v-spacer></v-spacer>
+      </v-navigation-drawer>
 
-         <v-btn icon>
-           <v-icon>mdi-magnify</v-icon>
-         </v-btn>
-
-         <v-btn class="ma-2" outlined color="indigo">Login</v-btn>
-       </v-app-bar>
-     </div>
-
-     <v-container class="grey lighten-5">
-       <v-row>
-         <v-col cols="12" >
-           <v-row align="center" justify="center" class="grey lighten-5">
-
-
-
-                <Skills/>
-
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-container>
-
+    </nav>
+    
+    <v-container fluid>
+      <v-row>
+        <v-col class="pa-md-4 mx-lg-auto">
+          <router-view />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
-
 </template>
 
 <script>
-
-import Skills from './components/Skills';
+//import Skills from "./components/Skills";
 //import Login from './components/Login';
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Skills,
+    //Skills
     //Login
   },
-
   data: () => ({
-    //
-  }),
+    drawer: false
+  })
 };
 </script>
 
 <style>
-
 </style>
