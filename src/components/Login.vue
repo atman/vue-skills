@@ -12,7 +12,7 @@ export default {
     GoogleSignInButton
   },
   data: () => ({
-    clientId: '289512574220-pp3dt8knl6a0tdlagmq9qg1ru209gkqa.apps.googleusercontent.com'
+    clientId: ''
   }),
   methods: {
     OnGoogleAuthSuccess (idToken) {
