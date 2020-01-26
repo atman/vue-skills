@@ -21,6 +21,8 @@
          <v-col cols="12" >
            <v-row align="center" justify="center" class="grey lighten-5">
 
+
+
                 <Skills/>
 
             </v-row>
@@ -29,17 +31,19 @@
       </v-container>
 
   </v-app>
+
 </template>
 
 <script>
 
 import Skills from './components/Skills';
+//import Login from './components/Login';
 
 export default {
   name: 'App',
-
   components: {
-    Skills
+    Skills,
+    //Login
   },
 
   data: () => ({
